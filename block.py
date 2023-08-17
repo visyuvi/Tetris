@@ -5,6 +5,7 @@ class Block(pg.sprite.Sprite):
     def __init__(self, tetromino, pos):
         self.tetromino = tetromino
         self.pos = vec(pos) + INIT_POS_OFFSET
+        self.next_pos = vec(pos) + NEXT_POS_OFFSET
         super().__init__(tetromino.tetris.sprite_group)
         self.image = pg.Surface([TILE_SIZE, TILE_SIZE])
         self.color = self.tetromino.color
@@ -23,7 +24,8 @@ class Block(pg.sprite.Sprite):
         return rotated + pivot_pos
 
     def set_rect_pos(self):
-        self.rect.topleft = self.pos * TILE_SIZE
+        pos = [self.next_pos, self.pos][self.tetromino.current]
+        self.rect.topleft = pos * TILE_SIZE
 
     def update(self):
         self.is_alive()

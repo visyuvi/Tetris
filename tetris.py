@@ -8,6 +8,7 @@ class Tetris:
         self.sprite_group = pg.sprite.Group()
         self.field_array = self.get_field_array()
         self.tetromino = Tetromino(self)
+        self.next_tetromino = Tetromino(self, current=False)
         self.speedup = False
 
     def put_tetromino_blocks_in_array(self):
@@ -30,14 +31,25 @@ class Tetris:
                     self.field_array[row][x].alive = False
                     self.field_array[row][x] = 0
 
+    def is_game_over(self):
+        if self.tetromino.blocks[0].pos.y == INIT_POS_OFFSET[1]:
+            pg.time.wait(300)
+            return True
+        return False
+
     def get_field_array(self):
         return [[0 for _ in range(FIELD_W)] for _ in range(FIELD_H)]
 
     def check_tetromino_landing(self):
         if self.tetromino.landing:
-            self.speedup = False
-            self.put_tetromino_blocks_in_array()
-            self.tetromino = Tetromino(self)
+            if self.is_game_over():
+                self.__init__(self.app)
+            else:
+                self.speedup = False
+                self.put_tetromino_blocks_in_array()
+                self.next_tetromino.current = True
+                self.tetromino = self.next_tetromino
+                self.next_tetromino = Tetromino(self, current=False)
 
     def control(self, pressed_key):
         if pressed_key == pg.K_LEFT:
