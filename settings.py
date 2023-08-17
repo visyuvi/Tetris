@@ -5,7 +5,7 @@ vec = pg.math.Vector2
 FPS = 60
 FIELD_COLOR = (48, 39, 32)
 
-ANIM_TIME_INTERVAL = 150  # milliseconds
+ANIM_TIME_INTERVAL = 300 # milliseconds
 FAST_ANIM_TIME_INTERVAL = 15
 TILE_SIZE = 50
 FIELD_SIZE = FIELD_W, FIELD_H = 10, 20
@@ -22,3 +22,12 @@ TETROMINOES = {
     'S': [(0, 0), (-1, 0), (0, -1), (1, -1)],
     'Z': [(0, 0), (1, 0), (0, -1), (-1, -1)],
 }
+COLORS = {'violet': 0,
+          'indigo': 1,
+          'blue': 2,
+          'green': 3,
+          'yellow': 4,
+          'orange': 5,
+          'red': 6,
+          'white': 7,
+          }

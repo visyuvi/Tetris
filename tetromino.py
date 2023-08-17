@@ -7,6 +7,7 @@ class Tetromino:
     def __init__(self, tetris):
         self.tetris = tetris
         self.shape = random.choice(list(TETROMINOES.keys()))
+        self.color = random.choice(list(COLORS.keys()))
         self.blocks = [Block(self, pos) for pos in TETROMINOES[self.shape]]
         self.landing = False
 
