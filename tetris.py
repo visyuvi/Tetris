@@ -1,5 +1,4 @@
 from settings import *
-import math
 from tetromino import Tetromino
 
 
@@ -16,7 +15,7 @@ class Tetris:
             self.field_array[y][x] = block
 
     def get_field_array(self):
-        return [[0 for x in range(FIELD_W)] for y in range(FIELD_H)]
+        return [[0 for _ in range(FIELD_W)] for _ in range(FIELD_H)]
 
     def check_tetromino_landing(self):
         if self.tetromino.landing:
