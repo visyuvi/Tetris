@@ -1,5 +1,6 @@
 from settings import *
 from tetris import Tetris
+from text import Text
 import sys
 
 
@@ -16,6 +17,7 @@ class App:
         self.fast_user_event = None
         self.set_timer()
         self.tetris = Tetris(self)
+        self.text = Text(self)
 
     def set_timer(self):
         self.user_event = pg.USEREVENT + 0
@@ -33,6 +35,7 @@ class App:
         self.screen.fill(color=BG_COLOR)
         self.screen.fill(color=FIELD_COLOR, rect=(0, 0, *FIELD_RES))
         self.tetris.draw()
+        self.text.draw()
         pg.display.flip()
 
     def check_events(self):
@@ -49,7 +52,6 @@ class App:
                 self.anim_trigger = True
             elif event.type == self.fast_user_event:
                 self.fast_anim_trigger = True
-
 
     def run(self):
         while True:

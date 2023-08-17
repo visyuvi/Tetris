@@ -11,6 +11,14 @@ class Tetris:
         self.next_tetromino = Tetromino(self, current=False)
         self.speedup = False
 
+        self.score = 0
+        self.full_lines = 0
+        self.points_per_lines = {0: 0, 1: 100, 2: 300, 3: 700, 4: 1500}
+
+    def get_score(self):
+        self.score += self.points_per_lines[self.full_lines]
+        self.full_lines = 0
+
     def put_tetromino_blocks_in_array(self):
         for block in self.tetromino.blocks:
             x, y = int(block.pos.x), int(block.pos.y)
@@ -30,6 +38,7 @@ class Tetris:
                 for x in range(FIELD_W):
                     self.field_array[row][x].alive = False
                     self.field_array[row][x] = 0
+                self.full_lines += 1
 
     def is_game_over(self):
         if self.tetromino.blocks[0].pos.y == INIT_POS_OFFSET[1]:
@@ -72,6 +81,7 @@ class Tetris:
             self.check_full_lines()
             self.tetromino.update()
             self.check_tetromino_landing()
+            self.get_score()
         self.sprite_group.update()
 
     def draw(self):
